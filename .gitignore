@@ -1,0 +1,23 @@
+# Root ignores for the monorepo
+.DS_Store
+Thumbs.db
+
+# Local IDE/workspace files
+.idea/
+.vscode/
+
+# Angular
+angular/node_modules/
+angular/dist/
+angular/.angular/
+
+# Spring Boot / Maven
+demo/target/
+demo/.idea/
+demo/.vscode/
+demo/demo/
+demo/demo/target/
+
+# Secrets and local overrides
+demo/src/main/resources/application-local.properties
+demo/src/main/resources/application-secrets.properties
