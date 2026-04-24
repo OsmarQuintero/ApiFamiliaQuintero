@@ -1,5 +1,5 @@
 {
-    "outputDirectory": "dist/quinterovaladez/browser",
+    "outputDirectory": "dist/quinterovaladez",
     "routes": [
       {
         "src": "/(.*)",
