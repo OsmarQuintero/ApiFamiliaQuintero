@@ -1,0 +1,9 @@
+{
+    "outputDirectory": "dist/quinterovaladez/browser",
+    "routes": [
+      {
+        "src": "/(.*)",
+        "dest": "/index.html"
+      }
+    ]
+  }
