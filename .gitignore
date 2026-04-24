@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # See https://docs.github.com/get-started/getting-started-with-git/ignoring-files for more about ignoring files.
 
 # Compiled output
@@ -41,3 +42,28 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+=======
+# Root ignores for the monorepo
+.DS_Store
+Thumbs.db
+
+# Local IDE/workspace files
+.idea/
+.vscode/
+
+# Angular
+angular/node_modules/
+angular/dist/
+angular/.angular/
+
+# Spring Boot / Maven
+demo/target/
+demo/.idea/
+demo/.vscode/
+demo/demo/
+demo/demo/target/
+
+# Secrets and local overrides
+demo/src/main/resources/application-local.properties
+demo/src/main/resources/application-secrets.properties
+>>>>>>> 24d213e28adaee412f0c46fd11bb41aa73e8e953

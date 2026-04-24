@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Moralesperez
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.4.
@@ -57,3 +58,65 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+=======
+# ApiFamilia
+
+Proyecto dividido en dos partes:
+
+- `angular/`: frontend en Angular
+- `demo/`: backend en Spring Boot
+
+## Requisitos
+
+- Node.js 20+ o compatible con Angular CLI
+- Java 17
+- MySQL
+
+## Frontend
+
+```bash
+cd angular
+npm install
+npm start
+```
+
+Abre `http://localhost:4200`.
+
+## Backend
+
+Antes de iniciar, configura estas variables de entorno:
+
+- `DB_URL`
+- `DB_USERNAME`
+- `DB_PASSWORD`
+- `GOOGLE_CLIENT_ID`
+- `GOOGLE_CLIENT_SECRET`
+
+Ejemplo en PowerShell:
+
+```powershell
+$env:DB_URL="jdbc:mysql://localhost:3306/proyecto_integrantes"
+$env:DB_USERNAME="root"
+$env:DB_PASSWORD="tu_password"
+$env:GOOGLE_CLIENT_ID="tu_google_client_id"
+$env:GOOGLE_CLIENT_SECRET="tu_google_client_secret"
+```
+
+Luego inicia el backend:
+
+```bash
+cd demo
+.\mvnw.cmd spring-boot:run
+```
+
+Base URL del backend: `http://localhost:8080`
+
+## Endpoints utiles
+
+- `GET /api/integrantes`
+- `POST /api/integrantes`
+- `DELETE /api/integrantes/{id}`
+- `GET /api/user`
+- `POST /api/logout`
+- `GET /oauth2/authorization/google`
+>>>>>>> 24d213e28adaee412f0c46fd11bb41aa73e8e953
