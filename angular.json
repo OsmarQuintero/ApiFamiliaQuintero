@@ -69,10 +69,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "moralesperez:build:production"
+              "buildTarget": "quinterovaladez:build:production"
             },
             "development": {
-              "buildTarget": "moralesperez:build:development"
+              "buildTarget": "quinterovaladez:build:development"
             }
           },
           "defaultConfiguration": "development"
