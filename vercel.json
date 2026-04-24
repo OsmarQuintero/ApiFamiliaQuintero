@@ -1,5 +1,5 @@
 {
-    "outputDirectory": "dist/quinterovaladez",
+    "outputDirectory": "dist/moralesperez",
     "routes": [
       {
         "src": "/(.*)",
