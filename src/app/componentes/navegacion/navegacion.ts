@@ -15,8 +15,8 @@ export class Navegacion implements OnInit {
     this.auth.cargarUsuario();
   }
 
-  iniciarSesion(): void {
-    this.auth.iniciarSesion();
+  loginGoogle(): void {
+    this.auth.iniciarGoogle();
   }
 
   cerrarSesion(): void {
