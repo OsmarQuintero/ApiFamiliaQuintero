@@ -11,7 +11,8 @@ import { Auth } from '../../servicios/auth';
 export class Navegacion implements OnInit {
   readonly auth = inject(Auth);
 
-  ngOnInit(): void {
+  ngOnInit() {
+    this.auth.initGoogle();
     this.auth.cargarUsuario();
   }
 

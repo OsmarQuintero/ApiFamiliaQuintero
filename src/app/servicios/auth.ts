@@ -16,26 +16,49 @@ export class Auth {
 
   private readonly platformId = inject(PLATFORM_ID);
   private readonly isBrowser = isPlatformBrowser(this.platformId);
+  private initialized = false;
 
   readonly usuario = signal<UsuarioGoogle | null>(null);
 
-  // 🔥 NO constructor con cargarUsuario()
+  initGoogle() {
+    if (!this.isBrowser) return;
+    if (this.initialized) return;
 
-  iniciarGoogle(): void {
+    const interval = setInterval(() => {
+      if (typeof google !== 'undefined' && google.accounts) {
+        clearInterval(interval);
+
+        google.accounts.id.initialize({
+          client_id: '1006167348314-805siqp4bfi5npn8v9airt36ih4oa3pq.apps.googleusercontent.com',
+          callback: (res: any) => this.handleLogin(res)
+        });
+
+        this.initialized = true;
+        console.log("Google inicializado ✅");
+        
+        // Mostrar el prompt de Google automáticamente después de inicializar
+        setTimeout(() => {
+          google.accounts.id.prompt();
+        }, 500);
+      }
+    }, 300);
+  }
+
+  iniciarGoogle() {
     if (!this.isBrowser) return;
 
-    google.accounts.id.initialize({
-      client_id: '1006167348314-805siqp4bfi5npn8v9airt36ih4oa3pq.apps.googleusercontent.com',
-      callback: (response: any) => this.handleLogin(response)
-    });
-
-    google.accounts.id.prompt();
+    // Mostrar el diálogo nativo de Google Sign-In
+    if (typeof google !== 'undefined' && google.accounts) {
+      google.accounts.id.prompt();
+    } else {
+      console.error("Google Sign-In no está disponible");
+    }
   }
 
   private handleLogin(response: any) {
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
 
-    const user: UsuarioGoogle = {
+    const user = {
       name: payload.name,
       email: payload.email,
       picture: payload.picture
@@ -46,10 +69,12 @@ export class Auth {
     if (this.isBrowser) {
       localStorage.setItem('user', JSON.stringify(user));
     }
+
+    console.log("✅ Sesión iniciada con Google:", user);
   }
 
   cargarUsuario() {
-    if (!this.isBrowser) return; // 🔥 CLAVE
+    if (!this.isBrowser) return;
 
     const data = localStorage.getItem('user');
     if (data) {
