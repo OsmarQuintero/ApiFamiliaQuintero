@@ -1,4 +1,5 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 export interface UsuarioGoogle {
   name: string;
@@ -13,32 +14,24 @@ declare const google: any;
 })
 export class Auth {
 
-  // 👉 Tu credencial (Client ID)
-  private readonly clientId = '1006167348314-805siqp4bfi5npn8v9airt36ih4oa3pq.apps.googleusercontent.com';
+  private readonly platformId = inject(PLATFORM_ID);
+  private readonly isBrowser = isPlatformBrowser(this.platformId);
 
   readonly usuario = signal<UsuarioGoogle | null>(null);
 
-  constructor() {
-    this.cargarUsuario();
-    this.initGoogle();
-  }
+  // 🔥 NO constructor con cargarUsuario()
 
-  // 🔥 Inicializa Google con el script del index.html
-  private initGoogle() {
-    if (typeof google === 'undefined') return;
+  iniciarGoogle(): void {
+    if (!this.isBrowser) return;
 
     google.accounts.id.initialize({
-      client_id: this.clientId,
+      client_id: '1006167348314-805siqp4bfi5npn8v9airt36ih4oa3pq.apps.googleusercontent.com',
       callback: (response: any) => this.handleLogin(response)
     });
-  }
 
-  // 🔥 Lanza el login
-  iniciarGoogle(): void {
     google.accounts.id.prompt();
   }
 
-  // 🔥 Procesa el login
   private handleLogin(response: any) {
     const payload = JSON.parse(atob(response.credential.split('.')[1]));
 
@@ -49,20 +42,26 @@ export class Auth {
     };
 
     this.usuario.set(user);
-    localStorage.setItem('user', JSON.stringify(user));
+
+    if (this.isBrowser) {
+      localStorage.setItem('user', JSON.stringify(user));
+    }
   }
 
-  // 🔄 Mantener sesión
   cargarUsuario() {
+    if (!this.isBrowser) return; // 🔥 CLAVE
+
     const data = localStorage.getItem('user');
     if (data) {
       this.usuario.set(JSON.parse(data));
     }
   }
 
-  // 🚪 Logout
   cerrarSesion() {
     this.usuario.set(null);
-    localStorage.removeItem('user');
+
+    if (this.isBrowser) {
+      localStorage.removeItem('user');
+    }
   }
 }
