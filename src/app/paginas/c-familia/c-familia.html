@@ -1,0 +1,33 @@
+<section class="familia-section">
+  <div class="familia-header">
+    <p class="eyebrow">Miembros de la familia</p>
+    <h2>Integrantes registrados</h2>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover align-middle">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Fecha nac.</th>
+          <th scope="col">Parentesco</th>
+          <th scope="col">Telefono</th>
+        </tr>
+      </thead>
+      <tbody>
+      @for (item of datosFamilia; track item.id) {
+        <tr>
+          <th scope="row">{{item.id}}</th>
+          <td>{{item.nombre}}</td>
+          <td>{{item.apellido}}</td>
+          <td>{{item.fechaNacimiento}}</td>
+          <td>{{item.parentesco}}</td>
+          <td>{{item.telefono}}</td>
+        </tr>
+      }
+      </tbody>
+    </table>
+  </div>
+</section>
