@@ -22,7 +22,7 @@ export interface UsuarioGoogle {
 export class Auth {
   private readonly http = inject(HttpClient);
   private readonly isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
-  private readonly apiBaseUrl = 'api-familia-quintero-r58a4d2eu-osmarquinteros-projects.vercel.app';
+  private readonly apiBaseUrl = 'https://api-familia-quintero.vercel.app/home';
 
   readonly usuario = signal<UsuarioGoogle | null>(null);
   readonly cargando = signal(false);
